@@ -1,12 +1,8 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import prisma from '@/lib/db';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
-      <Button variant={"link"}>
-        Click me!
-      </Button>
     </div>
   );
 }
