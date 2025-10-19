@@ -1,7 +1,7 @@
 import { inngest } from "@/inngest/client";
 import prisma from "@/lib/db";
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
-import z from "zod";
+import { z } from "zod";
 import {generateSlug} from 'random-word-slugs';
 
 export const projectRouter = createTRPCRouter({
@@ -18,8 +18,9 @@ export const projectRouter = createTRPCRouter({
         .input(
             z.object({
                 value: z.string()
-                .min(1, {message:"Promt is required"})
-                .max(10000, {message:"Promt is too long"})
+                .trim()
+                .min(1, {message:"Prompt is required"})
+                .max(10000, {message:"Prompt is too long"})
             })
         )
         .mutation( async ({input}) =>{
