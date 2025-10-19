@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const res = await fetch("https://api.perplexity.ai/chat/completions", {
+  const res = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+      Authorization: `Bearer ${process.env.GEMINI_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "sonar", // or gpt-4, etc.
+      model: "gemini-1.5-flash", // or gpt-4, etc.
       messages: [
         {
           role: "user",
