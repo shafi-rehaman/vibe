@@ -8,7 +8,7 @@ export const messageRouter = createTRPCRouter({
         .query(async () => {
             const messages = await prisma.message.findMany({
                 orderBy:{
-                    updateAt:'desc'
+                    updatedAt:'desc'
                 }
             });
             return messages;
@@ -17,11 +17,13 @@ export const messageRouter = createTRPCRouter({
         .input(
             z.object({
                 value: z.string().min(1, {message:"Message is required"}),
+                projectId: z.string().min(1, {message:"Project Id is required"})
             })
         )
         .mutation( async ({input}) =>{
             const createdMessage = await prisma.message.create({
                 data:{
+                    projectId:input.projectId,
                     content:input.value,
                     role: "USER",
                     type: "RESULT"
@@ -32,7 +34,8 @@ export const messageRouter = createTRPCRouter({
                 await inngest.send({
                     name:"code-agent/run",
                     data : {
-                      value: input.value
+                      value: input.value,
+                      projectId: input.projectId
                     }
                 })
             } catch (error) {
