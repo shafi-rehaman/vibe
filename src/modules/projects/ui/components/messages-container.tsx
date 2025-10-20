@@ -29,7 +29,7 @@ export const MessagesContainer = ({
     }
     ))
     // useEffect(()=>{
-    //     const lastAssistantMessageWithFragment = messages.find(
+    //     const lastAssistantMessageWithFragment = messages.findLast(
     //         (message)=> message.role === 'ASSISTANT' && !!message.fragment);
     //     if(lastAssistantMessageWithFragment && lastAssistantMessageWithFragment.fragment){
     //         setActiveFragment(lastAssistantMessageWithFragment.fragment)
@@ -55,7 +55,7 @@ export const MessagesContainer = ({
                             fragment ={message.fragment}
                             type = {message.type}
                             createdAt={message.createdAt}
-                            isActiveFragment={activeFragment?.id === message?.id}
+                            isActiveFragment={activeFragment?.id === message.fragment?.id}
                             onFragmentClick={()=> setActiveFragment(message.fragment)}
                         />
                     ))}
