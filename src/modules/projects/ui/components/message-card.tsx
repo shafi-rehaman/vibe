@@ -131,18 +131,8 @@ export const MessageCard = ({
     }
 
     return(
-        <>
         <UserMessage 
             content={content}
         />
-        <AssistantMessage 
-                content={"content is king, consistancy is king, patience is king, king is king"}
-                fragment={fragment}
-                createdAt={createdAt}
-                isActiveFragment={isActiveFragment}
-                onFragmentClick={onFragmentClick}
-                type={type}
-            />
-        </>
     )
 }
