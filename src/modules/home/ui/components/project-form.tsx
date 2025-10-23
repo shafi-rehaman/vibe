@@ -1,18 +1,19 @@
 "use client"
+import {z} from "zod"
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import TextareaAutoSize from "react-textarea-autosize"
-import {z} from "zod"
 import { toast } from "sonner"
 import { ArrowUpIcon, Loader2Icon } from "lucide-react"
 import { useState } from "react"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cn } from "@/lib/utils"
 import { useTRPC } from "@/trpc/client"
 import { Button } from "@/components/ui/button"
 import { Form, FormField } from "@/components/ui/form";
 import { PROJECT_TEMPLATES } from "@/app/(home)/constant";
+import { useClerk } from "@clerk/nextjs";
 
 const formSchema = z.object({
     value: z.string()
@@ -24,6 +25,7 @@ export const ProjectForm = () => {
     const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const clerk = useClerk();
     const createProject = useMutation(trpc.projects.create.mutationOptions({
         onSuccess:(data)=>{
             queryClient.invalidateQueries(
@@ -33,8 +35,11 @@ export const ProjectForm = () => {
             //TODO: invalidate usage status
         },
         onError:(err)=>{
-            //TODO: redirect to pricing page if specific error 
             toast.error(err.message)
+            if(err.data?.code === 'UNAUTHORIZED'){
+                clerk.openSignIn();
+            }
+            //TODO: redirect to pricing page if specific error  
         }
     }));
     

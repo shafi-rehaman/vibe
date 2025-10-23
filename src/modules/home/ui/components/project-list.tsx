@@ -2,15 +2,18 @@
 
 import Link  from "next/link";
 import Image from "next/image";
-import { FormatDistanceFn, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
 
 export const ProjectList = ( ) =>{
     const trpc = useTRPC();
+    const user = useUser();
     const {data: projects} = useQuery(trpc.projects.getMany.queryOptions())
     
+    if(!user.user) return null;
     return(
         <div
             className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex flex-col gap-y-6 sm:gap-y-4"
