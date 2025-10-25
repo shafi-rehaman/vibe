@@ -4,7 +4,6 @@ import {ExternalLinkIcon, RefreshCcwIcon} from 'lucide-react'
 import { Fragment } from "@/generated/prisma";
 import {Button} from '@/components/ui/button';
 import { Hint } from '../hint';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface Props{
     data: Fragment;

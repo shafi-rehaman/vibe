@@ -1,7 +1,6 @@
 import { inngest } from "@/inngest/client";
 import prisma from "@/lib/db";
 import {
-  baseProcedure,
   createTRPCRouter,
   protectedProcedure,
 } from "@/trpc/init";

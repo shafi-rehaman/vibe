@@ -1,7 +1,7 @@
 "use client";
 
-import { useTRPC } from "@/trpc/client";
-import { useSuspenseQuery } from "@tanstack/react-query";
+// import { useTRPC } from "@/trpc/client";
+// import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { MessagesContainer } from "../components/messages-container";
 import { Suspense, useState } from "react";
@@ -29,10 +29,10 @@ interface Props {
 export const ProjectView = ({projectId}: Props ) => {
     const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
     const [tabState, setTabState] = useState<"preview" | "code">("preview");
-    const trpc = useTRPC();
-    const {data: project} = useSuspenseQuery(trpc.projects.getOne.queryOptions({
-        id:projectId
-    }))
+    // const trpc = useTRPC();
+    // const {data: project} = useSuspenseQuery(trpc.projects.getOne.queryOptions({
+    //     id:projectId
+    // }))
     const {has} = useAuth();
     const hasProAccess = has?.({plan:"pro_user"});
 
