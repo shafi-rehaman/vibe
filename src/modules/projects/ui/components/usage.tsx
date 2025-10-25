@@ -4,6 +4,7 @@ import { formatDuration, intervalToDuration } from "date-fns"
 import { Button } from "@/components/ui/button"
 import { auth } from "@clerk/nextjs/server"
 import { useAuth } from "@clerk/nextjs"
+import { useMemo } from "react"
 
 interface Props{
     points:number,
@@ -14,6 +15,20 @@ interface Props{
 export const Usage = ({points, msBeforeNext}: Props) => {
     const {has} = useAuth();
     const hasProAccess = has?.({plan:"pro_user"});
+    const resetTime = useMemo(() =>{
+        try{
+            return formatDuration(
+                intervalToDuration({
+                    start: new Date(),
+                    end: new Date(Date.now() + msBeforeNext)
+                }),
+                {format: ['months', 'days', 'hours']}
+            );
+        }catch(err){
+            console.log("Error formating duration", err);
+            return "Unknown"
+        }
+    }, [msBeforeNext]);
     return(
         <div className="rounded-t-xl bg-background border-1 border-b-0 p-2.5 px-4">
             <div className="flex items-center gap-x-1 ">
@@ -22,14 +37,7 @@ export const Usage = ({points, msBeforeNext}: Props) => {
                         {points} { hasProAccess ? "" : "free" } credits remaining
                     </p>
                     <p className="text-xs text-muted-foreground">
-                        Resets in {""}
-                        {formatDuration(
-                            intervalToDuration({
-                                start: new Date(),
-                                end: new Date(Date.now() + msBeforeNext)
-                            }),
-                            {format: ['months', 'days', 'hours']}
-                        )}
+                        Resets in{" "} {resetTime}
                     </p>
                 </div>
                 {!hasProAccess &&
