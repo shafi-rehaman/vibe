@@ -1,10 +1,15 @@
 import {ClerkProvider} from "@clerk/nextjs"
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "sonner";
+
+const poppin = Poppins({
+  weight:'100',
+  subsets:['latin']
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +42,7 @@ export default function RootLayout({
       <TRPCReactProvider>
         <html lang="en" suppressHydrationWarning>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${poppin} antialiased`}
             >
               <ThemeProvider 
                 attribute="class"
