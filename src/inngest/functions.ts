@@ -1,6 +1,6 @@
 import z from "zod";
 import { inngest } from "./client";
-import { createAgent, createNetwork, createTool, gemini, type Tool, type Message, createState} from '@inngest/agent-kit';
+import {createAgent, createNetwork, createTool, gemini, type Tool, type Message, createState, } from '@inngest/agent-kit';
 import {Sandbox} from '@e2b/code-interpreter';
 import { getSandbox, lastAssistantTextMessageContent, parseAgentOutput } from "./utils";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/prompt";

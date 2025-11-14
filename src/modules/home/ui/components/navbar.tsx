@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {Explora } from "next/font/google";
+// import {Explora } from "next/font/google";
 import {
     SignedIn, SignedOut, SignInButton, SignUpButton
 } from "@clerk/nextjs"
@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 
 
 
-const explora = Explora({
-    subsets: ["latin"],
-    weight: "400", // Explora only has one weight
-    variable: "--font-explora",
-  });
+// const explora = Explora({
+//     subsets: ["latin"],
+//     weight: "400", // Explora only has one weight
+//     variable: "--font-explora",
+//   });
 
 export const Navbar = () => {
     const isScrolled = useScroll({threshold:10});
@@ -33,23 +33,23 @@ export const Navbar = () => {
             <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
                 <Link href='/' className="flex items-center gap-2"
                 >
-                    <span className={`font-semibold text-lg ${explora.variable} font-sans`}>Vibe</span>
+                    <span className="text-xl italic tracking-wider font-bold" >Vibe</span>
                 </Link>
                 <div className="flex justify-between items-center gap-10">
                     <Link 
                     href={'/'}
                     >
-                        <span className="">Home</span>
+                        <span className="hover:underline">Home</span>
                     </Link>
                     <Link 
                     href={'/'}
                     >
-                        <span className="">Work</span>
+                        <span className="hover:underline">Work</span>
                     </Link>
                     <Link 
                     href={'/'}
                     >
-                        <span className="">About</span>
+                        <span className="hover:underline">About</span>
                     </Link>
                 </div>
 

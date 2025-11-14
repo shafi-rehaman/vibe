@@ -1,4 +1,4 @@
-import Footer from "@/modules/home/ui/components/footer"
+// import Footer from "@/modules/home/ui/components/footer"
 import { Navbar } from "@/modules/home/ui/components/navbar"
 
 
@@ -10,10 +10,10 @@ const Layout = ({children}:Props) => {
     return(
         <main className="flex flex-col min-h-screen max-h-screen">
             <Navbar />
-            <div className="flex-1 flex flex-col px-4 pb-4">
+            <div className="flex-1 flex flex-col px-4">
                 {children}
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </main>
     )
 }
