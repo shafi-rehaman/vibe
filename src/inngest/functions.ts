@@ -4,8 +4,6 @@ import {
   createAgent,
   createNetwork,
   createTool,
-  gemini,
-  type Tool,
   type Message,
   createState,
   anthropic,
@@ -271,7 +269,7 @@ export const codeAgentFunction = inngest.createFunction(
     const { output: responseOutput } = await responseGenerator.run(
       result.state.data.summary
     );
-    const hasSummary = Boolean(result.state.data.summary?.trim());
+    // const hasSummary = Boolean(result.state.data.summary?.trim());
     const hasFiles =
       result.state.data.files &&
       Object.keys(result.state.data.files).length > 0;
